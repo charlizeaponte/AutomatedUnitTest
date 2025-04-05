@@ -1,0 +1,16 @@
+{
+  "name": "assignment-automated-unit-testing",
+  "version": "1.0.0",
+  "main": "runner.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^9.23.0",
+    "jest": "^29.7.0"
+  }
+}
