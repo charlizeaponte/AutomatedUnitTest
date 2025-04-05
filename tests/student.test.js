@@ -34,15 +34,15 @@ describe('Student Test', () =>{
       //arrange
       const testInstitution = new Institution('Quinnipiac University', 'quinnipiac.edu');
       const testStudent = new Student("Aponte", "Charlize", testInstitution, "2004-02-02", "caponte");
-      const course1 = new Course("Science", "SCI101", "General Science", 4);
-      const offering1 = new CourseOffering(course1, "001", 2024, "Fall");
-      const course2 = new Course("Math", "MAT201", "Advanced Math", 3);
-      const offering2 = new CourseOffering(course2, "002", 2025, "Spring");
+      const testCourse1 = new Course("Science", "SCI101", "General Science", 4);
+      const testCourseOffering = new CourseOffering(testCourse1, "001", 2024, "Fall");
+      const testCourse2 = new Course("Math", "MAT201", "Advanced Math", 3);
+      const testCourseOffering2 = new CourseOffering(testCourse2, "002", 2025, "Spring");
       //act
-      offering1.submit_grade(testStudent, 'B+');
-      testStudent.courseList.push(offering1);
-      offering2.submit_grade(testStudent, 'A-');
-      testStudent.courseList.push(offering2);
+      testCourseOffering.submit_grade(testStudent, 'B+');
+      testStudent.courseList.push(testCourseOffering);
+      testCourseOffering2.submit_grade(testStudent, 'A-');
+      testStudent.courseList.push(testCourseOffering2);
       const expectedGPA = (3.33 * 4 + 3.67 * 3) / (4 + 3);
       //assert
       expect(testStudent.gpa).toBeCloseTo(expectedGPA);
@@ -158,13 +158,13 @@ test('student.get credits sums credits from multiple courses', () => {
     //arrange
     const testInstitution = new Institution('Quinnipiac University', 'quinnipiac.edu');
     const testStudent = new Student("Aponte", "Charlize", testInstitution, "2004-02-02", "caponte");
-    const course1 = new Course("Art", "ART101", "Basic Drawing", 2);
-    const offering1 = new CourseOffering(course1, "003", 2023, "Fall");
-    const course2 = new Course("Music", "MUS101", "Intro to Music", 3);
-    const offering2 = new CourseOffering(course2, "004", 2024, "Spring");
+    const testCourse = new Course("Art", "ART101", "Basic Drawing", 2);
+    const testCourseOffering = new CourseOffering(testCourse, "003", 2023, "Fall");
+    const testCourse2 = new Course("Music", "MUS101", "Intro to Music", 3);
+    const testCourseOffering2 = new CourseOffering(testCourse2, "004", 2024, "Spring");
     //act
-    testStudent.courseList.push(offering1);
-    testStudent.courseList.push(offering2);
+    testStudent.courseList.push(testCourseOffering);
+    testStudent.courseList.push(testCourseOffering2);
     //assert
     expect(testStudent.credits).toBe(5);
 });
@@ -173,10 +173,10 @@ test('list_courses() does not list course when no grade is present', () => {
     //arrange
     const testInstitution = new Institution('Quinnipiac University', 'quinnipiac.edu');
     const testStudent = new Student("Aponte", "Charlize", testInstitution, "2004-02-02", "caponte");
-    const course = new Course("Engineering", "ENG101", "Intro to Engineering", 3);
-    const offering = new CourseOffering(course, "001", 2025, "Fall");
+    const testCourse = new Course("Engineering", "ENG101", "Intro to Engineering", 3);
+    const testCourseOffering = new CourseOffering(testCourse, "001", 2025, "Fall");
   //act
-    testStudent.courseList.push(offering);
+    testStudent.courseList.push(testCourseOffering);
     const courses = testStudent.list_courses();
   //assert
     expect(courses).toEqual([]);
@@ -185,11 +185,11 @@ test('list_courses() does not list course when no grade is present', () => {
     //arrange
     const testInstitution = new Institution('Quinnipiac University', 'quinnipiac.edu');
     const testStudent = new Student("Aponte", "Charlize", testInstitution, "2004-02-02", "caponte");
-    const course = new Course("Engineering", "ENG101", "Intro to Engineering", 3);
-    const offering = new CourseOffering(course, "001", 2025, "Fall");
+    const testCourse = new Course("Engineering", "ENG101", "Intro to Engineering", 3);
+    const testCourseOffering = new CourseOffering(testCourse, "001", 2025, "Fall");
   //act
-    offering.submit_grade(testStudent, 'Z'); 
-    testStudent.courseList.push(offering);
+    testCourseOffering.submit_grade(testStudent, 'Z'); 
+    testStudent.courseList.push(testCourseOffering);
   //assert
     expect(testStudent.gpa).toBe(0); 
   });
@@ -198,18 +198,16 @@ test('list_courses() does not list course when no grade is present', () => {
     const testInstitution = new Institution('Quinnipiac University', 'quinnipiac.edu');
     const testStudent = new Student("Aponte", "Charlize", testInstitution, "2004-02-02", "caponte");
   
-    const course1 = new Course("CS", "CSC100", "Intro to CS", 3);
-    const offering1 = new CourseOffering(course1, "001", 2023, "Spring");
-    const course2 = new Course("CS", "CSC200", "Data Structures", 3);
-    const offering2 = new CourseOffering(course2, "001", 2023, "Fall"); 
+    const testCourse = new Course("CS", "CSC100", "Intro to CS", 3);
+    const testCourseOffering = new CourseOffering(testCourse, "001", 2023, "Spring");
+    const testCourse2 = new Course("CS", "CSC200", "Data Structures", 3);
+    const testCourseOffering2 = new CourseOffering(testCourse2, "001", 2023, "Fall"); 
   
-    // Add grades and offerings to simulate completed courses
-    testStudent.transcript[offering1] = 'A';
-    testStudent.transcript[offering2] = 'A';
+    testStudent.transcript[testCourseOffering] = 'A';
+    testStudent.transcript[testCourseOffering2] = 'A';
   
-    // Overriding toString to produce key for transcript
-    offering1.toString = () => 'Intro to CS, CS CSC100-001 (2 2023)';
-    offering2.toString = () => 'Data Structures, CS CSC200-001 (4 2023)';
+    testCourseOffering.toString = () => 'Intro to CS, CS CSC100-001 (2 2023)';
+    testCourseOffering2.toString = () => 'Data Structures, CS CSC200-001 (4 2023)';
   
     const ordered = testStudent.list_courses();
     expect(ordered).toEqual([

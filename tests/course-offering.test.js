@@ -43,7 +43,7 @@ describe('CourseOffering Test', () => {
         expect(testCourseOffering.grades[testStudent.username]).toBe('B+');
     });
 
-    test('TC-14: verify if students were registered for a course', () => {
+    test('TC-11: verify if students were registered for a course', () => {
         //arrange
         const testInstitution = new Institution('Quinnipiac University', 'quinnipiac.edu');
         const testCourse = new Course('Mathematics', '101', 'Calculus I', 4);
